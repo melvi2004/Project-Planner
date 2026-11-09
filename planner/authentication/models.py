@@ -10,12 +10,22 @@ class RoleChoices(models.TextChoices):
     
     ADMIN='Admin','Admin'
 
-    PROJECT_COORDINATOR='Project_Coordinator','Project_Coordinator'
+    PROJECT_COORDINATOR='Project Coordinator','Project Coordinator'
+
+class TechChoices(models.TextChoices):
+
+    FRONTEND= 'Frontend Developer','Frontend Developer'   
+    BACKEND= 'Backend Developer','Backend Developer'   
+    FULLSTACK= 'Fullstack Developer','Fullstack Developer'
+    UIUX ='UI/UX Designer','UI/UX Designer'
+    TESTER='Software Tester','Software Tester'    
 
 
 class Profile(AbstractUser):
 
     role=models.CharField(max_length=20,choices=RoleChoices.choices)
+
+    tech=models.CharField(max_length=20,choices=TechChoices.choices,null=True,blank=True)
 
     class Meta:
 
@@ -25,4 +35,4 @@ class Profile(AbstractUser):
 
     def __str__(self):
        
-        return self.username            
+        return f'{self.username}-{self.role}-{self.tech}'           
